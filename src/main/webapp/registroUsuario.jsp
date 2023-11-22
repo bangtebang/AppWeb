@@ -11,6 +11,8 @@
         <input name="nombre" type="text" class="campoTexto">
         <label>Edad:</label>
         <input name="edad" type="number" class="campoTexto">
+        <label>Rut:</label>
+        <input name="rut" type="text" class="campoTexto">
         <br><br>
         <input type="submit" value="enviar" class="boton">
     </div>

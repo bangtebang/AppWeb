@@ -3,9 +3,11 @@ package model;
 public class Usuario {
     private String nombre;
     private int edad;
-    public Usuario(String nombre, int edad) {
+    private String rut;
+    public Usuario(String nombre, int edad, String rut) {
         this.nombre = nombre;
         this.edad = edad;
+        this.rut = rut;
     }
     public String getNombre() {
         return this.nombre;
@@ -20,6 +22,12 @@ public class Usuario {
 
     public int getEdad() {
         return this.edad;
+    }
+    public String getRut() {
+        return this.rut;
+    }
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
 }
