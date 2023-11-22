@@ -7,6 +7,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Usuario;
 
+import static model.data.DBGenerator.iniciarBD;
+
 @WebServlet(name = "registroUsuarioServlet", value = "/registroUsuario")
 public class RegistroUsuarioServlet extends HttpServlet {
 
@@ -20,6 +22,11 @@ public class RegistroUsuarioServlet extends HttpServlet {
             RequestDispatcher respuesta = req.getRequestDispatcher("/registroErroneo.jsp");
             respuesta.forward(req, resp);
         } else {
+            try {
+                iniciarBD("Red");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             String nombre = req.getParameter("nombre");
             int edad = Integer.parseInt(req.getParameter("edad"));
             String rut = req.getParameter("rut");
