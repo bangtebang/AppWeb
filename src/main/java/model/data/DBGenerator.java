@@ -35,7 +35,7 @@ public class DBGenerator {
     }
 
     private static void crearTablaUsuario(DSLContext create){
-        create.createTableIfNotExists("Estudiante").column("rut",VARCHAR(50))
+        create.createTableIfNotExists("Usuario").column("rut",VARCHAR(50))
                 .column("nombre",VARCHAR(100))
                 .column("edad",INTEGER)
                 .constraint(primaryKey("rut")).execute();

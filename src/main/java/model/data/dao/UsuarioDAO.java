@@ -16,22 +16,25 @@ public class UsuarioDAO {
         query.insertInto(tablaUsuario, columnas[0], columnas[1],columnas[2])
                 .values(usuario.getRut(),usuario.getNombre(),usuario.getEdad())
                 .execute();
-
     }
 
     public void modificarUsuario(DSLContext query, String rut, String columnaTabla, Object dato){
         query.update(DSL.table("Usuario")).set(DSL.field(columnaTabla),dato).
                 where(DSL.field("rut").eq(rut)).execute();
     }
-    public List obtenerUsuario(DSLContext query, String columnaTabla, Object dato){
+    public static List obtenerUsuario(DSLContext query, String columnaTabla, Object dato){
         Result resultados = query.select().from(DSL.table("Usuario")).where(DSL.field(columnaTabla).eq(dato)).fetch();
+        return obtenerListaUsarios(resultados);
+    }
+    public static List obtenerUsuarios(DSLContext query){
+        Result resultados = query.select().from(table("Usuario")).fetch();
         return obtenerListaUsarios(resultados);
     }
     public void eliminarUsuario(DSLContext query, String rut){
         Table tablaUsuario= table(name("Usuario"));
         query.delete(DSL.table("Usuario")).where(DSL.field("rut").eq(rut)).execute();
     }
-    private List obtenerListaUsarios(Result resultados){
+    private static List obtenerListaUsarios(Result resultados){
         List<Usuario> usuarios= new ArrayList<>();
         for(int fila=0; fila<resultados.size();fila++){
             String rut = (String) resultados.getValue(fila,"rut");
